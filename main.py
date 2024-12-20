@@ -20,3 +20,35 @@ class Hat:
             self.contents.remove(ball)
         
         return drawn_balls
+    
+    def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
+    successful_experiments = 0
+
+    for _ in range(num_experiments):
+        # Create a copy of the hat to ensure each experiment is independent
+        hat_copy = Hat(**{color: hat.contents.count(color) for color in set(hat.contents)})
+        
+        # Draw balls from the hat
+        drawn_balls = hat_copy.draw(num_balls_drawn)
+        
+        # Count the drawn balls
+        drawn_count = {}
+        for ball in drawn_balls:
+            if ball in drawn_count:
+                drawn_count[ball] += 1
+            else:
+                drawn_count[ball] = 1
+        
+        # Check if the drawn balls meet the expected criteria
+        success = True
+        for color, count in expected_balls.items():
+            if drawn_count.get(color, 0) < count:
+                success = False
+                break
+        
+        if success:
+            successful_experiments += 1
+
+    # Calculate the probability
+    probability = successful_experiments / num_experiments
+    return probability
