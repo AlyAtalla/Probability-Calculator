@@ -20,8 +20,8 @@ class Hat:
             self.contents.remove(ball)
         
         return drawn_balls
-    
-    def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
+
+def experiment(hat, expected_balls, num_balls_drawn, num_experiments):
     successful_experiments = 0
 
     for _ in range(num_experiments):
@@ -52,3 +52,15 @@ class Hat:
     # Calculate the probability
     probability = successful_experiments / num_experiments
     return probability
+
+# Example usage
+if __name__ == "__main__":
+    hat = Hat(blue=5, red=4, green=2)
+    probability = experiment(
+        hat=hat,
+        expected_balls={'red': 1, 'green': 2},
+        num_balls_drawn=4,
+        num_experiments=2000
+    )
+
+    print(probability)
