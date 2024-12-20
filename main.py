@@ -10,7 +10,9 @@ class Hat:
     def draw(self, num_balls):
         # If the number of balls to draw is greater than the available balls, return all balls
         if num_balls >= len(self.contents):
-            return self.contents[:]
+            all_balls = self.contents[:]
+            self.contents.clear()  # Optionally clear the contents if all balls are drawn
+            return all_balls
         
         # Randomly draw the specified number of balls
         drawn_balls = random.sample(self.contents, num_balls)
